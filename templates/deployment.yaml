@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mec-chart.fullname" . }}
+  labels:
+    {{- include "mec-chart.labels" . | nindent 4 }}
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "mec-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "mec-chart.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mec-chart.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+          - name: "MAX_CLIENTS"
+            valueFrom:
+              secretKeyRef: 
+                key: MAX_CLIENTS
+                name: {{ .Release.Name }}-env
+          - name: "UPLANE_CPLANE"
+            valueFrom:
+              secretKeyRef: 
+                key: UPLANE_CPLANE
+                name: {{ .Release.Name }}-env
+          - name: "UE_NETMASK"
+            valueFrom:
+              secretKeyRef: 
+                key: UE_NETMASK
+                name: {{ .Release.Name }}-env
+          - name: "UE_SUBNET"
+            valueFrom:
+              secretKeyRef: 
+                key: UE_SUBNET
+                name: {{ .Release.Name }}-env
+          - name: "CORE_IP"
+            valueFrom:
+              secretKeyRef: 
+                key: CORE_IP
+                name: {{ .Release.Name }}-env
+          - name: "CORE_SEND_PORT"
+            valueFrom:
+              secretKeyRef: 
+                key: CORE_SEND_PORT
+                name: {{ .Release.Name }}-env
+          - name: "ENB_IP"
+            valueFrom:
+              secretKeyRef: 
+                key: ENB_IP
+                name: {{ .Release.Name }}-env
+          - name: "MEC_IP"
+            valueFrom:
+              secretKeyRef: 
+                key: MEC_IP
+                name: {{ .Release.Name }}-env
+          - name: "MEC_LISTEN_PORT"
+            valueFrom:
+              secretKeyRef: 
+                key: MEC_LISTEN_PORT
+                name: {{ .Release.Name }}-env
+          - name: "MEC_SEND_PORT"
+            valueFrom:
+              secretKeyRef: 
+                key: MEC_SEND_PORT
+                name: {{ .Release.Name }}-env
+          - name: "SERVICE_SUBNET"
+            valueFrom:
+              secretKeyRef: 
+                key: SERVICE_SUBNET
+                name: {{ .Release.Name }}-env
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

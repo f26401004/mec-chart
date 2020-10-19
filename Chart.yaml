@@ -1,0 +1,18 @@
+apiVersion: v2
+name: mec
+version: 1.0.0
+description: MEC middlebox kernel module.
+type: application
+keywords:
+  - edge computing
+  - mec
+  - OAI
+  - middlebox
+home: http://nems.cs.nctu.edu.tw/release/
+sources:
+  - https://hub.docker.com/repository/docker/f26401004/mec
+maintainers:
+  - name: f26401004
+    email: f26401004@gmail.com
+appVersion: 1.0.0
+deprecated: false
