@@ -1,6 +1,5 @@
 # mec-chart
 
-## About the project
 Mobile/Multi-access edge computing (MEC) is one key technology to achieve low-latency performance in cellular networks. It has been determined as a key feature in future 5G networks by both ETSI and 3GPP standardization organizations. It seeks to provide a cloud computing platform at the network edge to be closer to mobile users than conventional cloud systems. Due to emerging low-latency demands, several MEC deployment solutions are being in development. We seek to design an MEC platform that can be easily deployed in 4G LTE networks, as well as may be used as a reference design for future 5G networks.
 
 ![](https://i.imgur.com/fYVk1wn.png)
@@ -10,8 +9,8 @@ We propose a middlebox approach for the MEC platform deployment in 4G LTE networ
 This is a demo for MEC system wrapped in **Helm Chart**, and the Docker image is located in Docker Hub ([here](https://hub.docker.com/repository/docker/f26401004/mec)) for any research experiment. You are able to deploy MEC kernel module to any IoT devices or hosts to reproduce our MEC system kernel features: forwarding module, gtp tunneling module. 
 
 ### Built with
-* Docker: a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
-* Helm: a tool for managing Charts which are packages of pre-configured Kubernetes resources.
+- Docker: a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
+- Helm: a tool for managing Charts which are packages of pre-configured Kubernetes resources.
 
 ## Getting Started
 
@@ -70,5 +69,5 @@ helm install -f ./mec-chart/values.yaml mec ./mec-chart
 ```
 
 ## Contact
-Maintainer: [f26401004](https://github.com/f26401004) - f26401004@gmail.com
-Project Link: [MEC Middlebox Solution](http://nems.cs.nctu.edu.tw/release/)
+- Maintainer: [f26401004](https://github.com/f26401004) - f26401004@gmail.com
+- Project Link: [MEC Middlebox Solution](http://nems.cs.nctu.edu.tw/release/)
