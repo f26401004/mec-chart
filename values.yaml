@@ -79,7 +79,7 @@ tolerations: []
 
 affinity: {}
 
-env:
+configs:
   # Basic settings
   MAX_CLIENTS: 30
   # User - plane mode or Control - plane more
