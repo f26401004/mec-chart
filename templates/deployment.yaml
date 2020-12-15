@@ -62,55 +62,51 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          envFrom:
-          # The ConfigMap we want to use
-          - configMapRef:
-              name: {{ .Release.Name }}-configmap
           env:
           - name: "MAX_CLIENTS"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.MAX_CLIENTS
+                fieldPath: spec.template.metadata.annotations['MAX_CLIENTS']
           - name: "UPLANE_CPLANE"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.UPLANE_CPLANE
+                fieldPath: spec.template.metadata.annotations['UPLANE_CPLANE']
           - name: "UE_NETMASK"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.UE_NETMASK
+                fieldPath: spec.template.metadata.annotations['UE_NETMASK']
           - name: "UE_SUBNET"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.UE_SUBNET
+                fieldPath: spec.template.metadata.annotations['UE_SUBNET']
           - name: "CORE_IP"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.CORE_IP
+                fieldPath: spec.template.metadata.annotations['CORE_IP']
           - name: "CORE_SEND_PORT"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.CORE_SEND_PORT
+                fieldPath: spec.template.metadata.annotations['CORE_SEND_PORT']
           - name: "ENB_IP"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.ENB_IP
+                fieldPath: spec.template.metadata.annotations['ENB_IP']
           - name: "MEC_IP"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.MEC_IP
+                fieldPath: spec.template.metadata.annotations['MEC_IP']
           - name: "MEC_LISTEN_PORT"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.MEC_LISTEN_PORT
+                fieldPath: spec.template.metadata.annotations['MEC_LISTEN_PORT']
           - name: "MEC_SEND_PORT"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.MEC_SEND_PORT
+                fieldPath: spec.template.metadata.annotations['MEC_SEND_PORT']
           - name: "SERVICE_SUBNET"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations.SERVICE_SUBNET
+                fieldPath: spec.template.metadata.annotations['SERVICE_SUBNET']
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
