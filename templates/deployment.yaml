@@ -16,21 +16,6 @@ spec:
     {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
-        # Basic settings
-        MAX_CLIENTS: {{ .Values.configs.MAX_CLIENTS }}
-        # User - plane mode or Control - plane more
-        UPLANE_CPLANE: {{ .Values.configs.UPLANE_CPLANE }}
-        # IP and port settings
-        UE_NETMASK: {{ .Values.configs.UE_NETMASK }}
-        UE_SUBNET: {{ .Values.configs.UE_SUBNET }}
-        # OAI
-        CORE_IP: {{ .Values.configs.CORE_IP }}
-        CORE_SEND_PORT: {{ .Values.configs.CORE_SEND_PORT }}
-        ENB_IP: {{ .Values.configs.ENB_IP }}
-        MEC_IP: {{ .Values.configs.MEC_IP }}
-        MEC_LISTEN_PORT: {{ .Values.configs.MEC_LISTEN_PORT }}
-        MEC_SEND_PORT: {{ .Values.configs.MEC_SEND_PORT }}
-        SERVICE_SUBNET: {{ .Values.configs.SERVICE_SUBNET }}
     {{- end }}
       labels:
         {{- include "mec-chart.selectorLabels" . | nindent 8 }}
@@ -66,47 +51,47 @@ spec:
           - name: "MAX_CLIENTS"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['MAX_CLIENTS']
+                fieldPath: metadata.annotations['MAX_CLIENTS']
           - name: "UPLANE_CPLANE"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['UPLANE_CPLANE']
+                fieldPath: metadata.annotations['UPLANE_CPLANE']
           - name: "UE_NETMASK"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['UE_NETMASK']
+                fieldPath: metadata.annotations['UE_NETMASK']
           - name: "UE_SUBNET"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['UE_SUBNET']
+                fieldPath: metadata.annotations['UE_SUBNET']
           - name: "CORE_IP"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['CORE_IP']
+                fieldPath: metadata.annotations['CORE_IP']
           - name: "CORE_SEND_PORT"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['CORE_SEND_PORT']
+                fieldPath: metadata.annotations['CORE_SEND_PORT']
           - name: "ENB_IP"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['ENB_IP']
+                fieldPath: metadata.annotations['ENB_IP']
           - name: "MEC_IP"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['MEC_IP']
+                fieldPath: metadata.annotations['MEC_IP']
           - name: "MEC_LISTEN_PORT"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['MEC_LISTEN_PORT']
+                fieldPath: metadata.annotations['MEC_LISTEN_PORT']
           - name: "MEC_SEND_PORT"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['MEC_SEND_PORT']
+                fieldPath: metadata.annotations['MEC_SEND_PORT']
           - name: "SERVICE_SUBNET"
             valueFrom:
               fieldRef:
-                fieldPath: spec.template.metadata.annotations['SERVICE_SUBNET']
+                fieldPath: metadata.annotations['SERVICE_SUBNET']
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
