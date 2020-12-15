@@ -41,7 +41,9 @@ podAnnotations: {
   'SERVICE_SUBNET': '172.17.1.1/24'
 }
 
-podSecurityContext: {}
+podSecurityContext: {
+  'privileged': true
+}
   # fsGroup: 2000
 
 # Enable all linux capabilities for gtp module 
