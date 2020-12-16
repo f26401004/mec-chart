@@ -9,6 +9,9 @@ spec:
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.podContainer.port }}
-      name: all
+      name: listen
+    - port: {{ .Values.service.portGTP }}
+      targetPort: {{ .Values.podContainer.portGTP }}
+      name: gtp
   selector:
     {{- include "mec-chart.selectorLabels" . | nindent 4 }}

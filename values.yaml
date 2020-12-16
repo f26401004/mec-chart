@@ -25,6 +25,7 @@ serviceAccount:
 
 podContainer:
   port: 7000
+  portGTP: 2152
 
 podAnnotations: {
   # Basic settings
@@ -61,6 +62,7 @@ securityContext:
 service:
   type: LoadBalancer
   port: 7000
+  portGTP: 2152
 
 ingress:
   enabled: false
